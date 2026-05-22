@@ -1,0 +1,5 @@
+﻿{
+  "name": "Firebase Preload",
+  "description": "Load Firebase JS SDK (app/auth/firestore/functions) before Unity loader.",
+  "homepage": "https://firebase.google.com/docs/web/setup"
+}

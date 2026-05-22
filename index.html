@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>PrisonerDilemma</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-functions-compat.js"></script>
+    <script>
+      (function initFirebaseForUnityWebGL() {
+        if (!window.firebase) {
+          console.error("[WebGLTemplate] Firebase SDK failed to load.");
+          return;
+        }
+        if (window.firebase.apps && window.firebase.apps.length > 0) return;
+
+        window.firebase.initializeApp({
+          apiKey: "AIzaSyCuwul6UxowWI-J_oXCSUknGysfMH4DMp4",
+          authDomain: "prisoner-s-dilemma-543d4.firebaseapp.com",
+          projectId: "prisoner-s-dilemma-543d4",
+          storageBucket: "prisoner-s-dilemma-543d4.firebasestorage.app",
+          messagingSenderId: "918488813308",
+          appId: "1:918488813308:android:493225e34ee450e35c5179"
+        });
+      })();
+    </script>
+  </head>
+  <body style="margin:0; padding:0; overflow:hidden; background:#1e1e1e;">
+    <canvas id="unity-canvas" width=960 height=600 tabindex="-1" style="width:100vw; height:100vh; background:#231f20"></canvas>
+
+    <script>
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/Test.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/Test.data.unityweb",
+        frameworkUrl: buildUrl + "/Test.framework.js.unityweb",
+        codeUrl: buildUrl + "/Test.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "MonoPoly",
+        productName: "PrisonerDilemma",
+        productVersion: "0.1.0"
+      };
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = function () {
+        createUnityInstance(document.querySelector("#unity-canvas"), config, function () {})
+          .catch(function (message) { alert(message); });
+      };
+      document.body.appendChild(script);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "918488813308",
+    "project_id": "prisoner-s-dilemma-543d4",
+    "storage_bucket": "prisoner-s-dilemma-543d4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:918488813308:android:493225e34ee450e35c5179",
+        "android_client_info": {
+          "package_name": "com.MonoPoly.PrisonerDilemma"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuwul6UxowWI-J_oXCSUknGysfMH4DMp4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
