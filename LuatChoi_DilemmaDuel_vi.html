@@ -3,142 +3,172 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Luật Chơi - Dilemma Duel</title>
+  <title>Luật Chơi - Dilemma Duel: Heal Charges</title>
   <style>
     :root {
-      color-scheme: light;
-      --bg: #f6f7f2;
-      --paper: #fffef8;
-      --ink: #1d2528;
-      --muted: #5d686f;
-      --line: #d8ded7;
-      --accent: #c94432;
-      --accent-2: #1f7a70;
-      --accent-soft: #fde9e3;
-      --accent-2-soft: #dff1ee;
-      --table-head: #24343a;
-      --shadow: 0 16px 42px rgba(34, 45, 49, 0.12);
+      color-scheme: dark;
+      --bg: #0e1317;
+      --panel: #151b21;
+      --panel-2: #10161b;
+      --ink: #f4f7fb;
+      --muted: #b7c0cb;
+      --line: #2b3540;
+      --gold: #ffc33d;
+      --red: #ff554a;
+      --blue: #5ca7ff;
+      --green: #49df83;
+      --soft-red: rgba(255, 85, 74, 0.14);
+      --soft-blue: rgba(92, 167, 255, 0.16);
+      --soft-gold: rgba(255, 195, 61, 0.16);
+      --shadow: 0 20px 70px rgba(0, 0, 0, 0.34);
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      background: var(--bg);
+      background:
+        radial-gradient(circle at 16% 8%, rgba(92, 167, 255, 0.16), transparent 28%),
+        linear-gradient(180deg, #0e1317 0%, #111820 48%, #0b1014 100%);
       color: var(--ink);
       font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     .page {
-      width: min(1080px, calc(100% - 32px));
+      width: min(1160px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 40px 0 56px;
+      padding: 34px 0 56px;
+    }
+
+    header,
+    section,
+    footer {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(21, 27, 33, 0.94);
+      box-shadow: var(--shadow);
     }
 
     header {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      padding: 36px;
-      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(320px, 1.08fr);
+      gap: 28px;
+      align-items: center;
+      padding: 28px;
+      margin-bottom: 18px;
     }
 
     .eyebrow {
       margin: 0 0 8px;
-      color: var(--accent);
+      color: var(--gold);
       font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0;
+      font-weight: 800;
       text-transform: uppercase;
+      letter-spacing: 0;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(32px, 5vw, 58px);
-      line-height: 1.05;
+      font-size: clamp(34px, 5vw, 62px);
+      line-height: 1.04;
       letter-spacing: 0;
     }
 
     .lead {
-      max-width: 760px;
       margin: 18px 0 0;
       color: var(--muted);
       font-size: 18px;
+      max-width: 660px;
+    }
+
+    .hero-image {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #090d10;
+    }
+
+    .hero-image img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
 
     .quick-facts {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 28px;
+      gap: 10px;
+      margin-top: 24px;
     }
 
     .fact {
+      min-height: 86px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      padding: 14px 16px;
-      background: #ffffff;
+      padding: 14px;
+      background: var(--panel-2);
     }
 
     .fact strong {
       display: block;
-      font-size: 24px;
+      color: var(--gold);
+      font-size: 27px;
       line-height: 1.1;
     }
 
     .fact span {
       display: block;
+      margin-top: 5px;
       color: var(--muted);
       font-size: 13px;
-      margin-top: 4px;
     }
 
     nav {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 8px;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
     }
 
     nav a {
       display: block;
       padding: 10px 12px;
-      color: var(--ink);
-      background: #ffffff;
       border: 1px solid var(--line);
       border-radius: 8px;
-      text-decoration: none;
+      background: rgba(16, 22, 27, 0.96);
+      color: var(--ink);
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
+      text-decoration: none;
     }
 
     nav a:hover {
-      border-color: var(--accent-2);
-      color: var(--accent-2);
+      border-color: var(--gold);
+      color: var(--gold);
     }
 
     section {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 8px;
       padding: 28px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     h2 {
       margin: 0 0 14px;
-      font-size: 26px;
-      line-height: 1.2;
+      font-size: 27px;
+      line-height: 1.22;
       letter-spacing: 0;
     }
 
     h3 {
-      margin: 22px 0 8px;
-      font-size: 19px;
+      margin: 24px 0 9px;
+      font-size: 20px;
       line-height: 1.25;
       letter-spacing: 0;
     }
@@ -158,12 +188,26 @@
     }
 
     code {
-      background: #edf0eb;
+      padding: 2px 6px;
       border: 1px solid var(--line);
       border-radius: 5px;
-      padding: 2px 6px;
+      background: #0d1216;
+      color: #ffffff;
       font-family: Consolas, "Courier New", monospace;
       font-size: 0.94em;
+    }
+
+    pre {
+      overflow-x: auto;
+      margin: 12px 0 0;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #0a0f13;
+      color: #e9eef5;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     .grid-two {
@@ -172,21 +216,26 @@
       gap: 14px;
     }
 
-    .action {
+    .card {
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 18px;
-      background: #ffffff;
+      background: var(--panel-2);
     }
 
-    .action.attack {
-      border-color: #efc4bb;
-      background: var(--accent-soft);
+    .attack {
+      border-color: rgba(255, 85, 74, 0.5);
+      background: var(--soft-red);
     }
 
-    .action.defend {
-      border-color: #b9dcd6;
-      background: var(--accent-2-soft);
+    .defend {
+      border-color: rgba(92, 167, 255, 0.55);
+      background: var(--soft-blue);
+    }
+
+    .heal {
+      border-color: rgba(255, 195, 61, 0.55);
+      background: var(--soft-gold);
     }
 
     .table-wrap {
@@ -194,13 +243,13 @@
       margin-top: 12px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: #ffffff;
+      background: #0d1216;
     }
 
     table {
       width: 100%;
+      min-width: 660px;
       border-collapse: collapse;
-      min-width: 620px;
     }
 
     th,
@@ -212,52 +261,108 @@
     }
 
     th {
-      background: var(--table-head);
+      background: #22303c;
       color: #ffffff;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     tr:last-child td {
       border-bottom: 0;
     }
 
-    .note {
-      border-left: 4px solid var(--accent-2);
-      background: #eef7f5;
-      padding: 14px 16px;
+    .note,
+    .warning {
       margin-top: 14px;
-      color: #234743;
+      padding: 14px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #0f171d;
     }
 
-    .callout {
-      border-left: 4px solid var(--accent);
-      background: #fff2ed;
-      padding: 14px 16px;
+    .note {
+      border-left: 4px solid var(--blue);
+      color: #d9ecff;
+    }
+
+    .warning {
+      border-left: 4px solid var(--gold);
+      color: #ffedbf;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
       margin-top: 14px;
-      color: #5f2a22;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #0d1216;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .pill strong {
+      color: var(--gold);
+      margin-right: 5px;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .result-good {
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .result-bad {
+      color: var(--red);
+      font-weight: 800;
     }
 
     footer {
+      padding: 18px;
       color: var(--muted);
       font-size: 13px;
       text-align: center;
-      padding: 8px 0 0;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 920px) {
+      header,
+      .grid-two,
+      .examples {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-facts,
+      nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
       .page {
-        width: min(100% - 20px, 1080px);
-        padding-top: 18px;
+        width: min(100% - 20px, 1160px);
+        padding-top: 16px;
       }
 
       header,
       section {
-        padding: 22px;
+        padding: 20px;
       }
 
       .quick-facts,
-      nav,
-      .grid-two {
+      nav {
         grid-template-columns: 1fr;
       }
     }
@@ -265,6 +370,7 @@
     @media print {
       body {
         background: #ffffff;
+        color: #000000;
       }
 
       .page {
@@ -273,13 +379,20 @@
       }
 
       header,
-      section {
+      section,
+      footer {
         box-shadow: none;
+        background: #ffffff;
+        color: #000000;
         break-inside: avoid;
       }
 
       nav {
         display: none;
+      }
+
+      .hero-image {
+        max-width: 760px;
       }
     }
   </style>
@@ -287,42 +400,49 @@
 <body>
   <main class="page">
     <header>
-      <p class="eyebrow">Bản luật chơi tiếng Việt</p>
-      <h1>Luật Chơi - Dilemma Duel</h1>
-      <p class="lead">
-        Trò chơi đối kháng theo lượt cho 2 người, nơi mỗi round là một lựa chọn bí mật giữa tấn công và phòng thủ.
-        Người chơi thắng bằng cách hạ HP đối thủ về 0 hoặc còn nhiều HP hơn sau 15 round.
-      </p>
+      <div>
+        <p class="eyebrow">Bản luật chơi MVP - Heal Charges</p>
+        <h1>Luật Chơi - Dilemma Duel</h1>
+        <p class="lead">
+          Trò chơi đối kháng theo lượt cho 2 người. Mỗi round, cả hai bí mật chọn
+          <code>Attack</code> hoặc <code>Defend</code>. Bản luật mới dùng
+          <code>Heal Charge</code> để giới hạn số lần hồi máu, giúp trận đấu rõ ràng và ít kéo dài hơn.
+        </p>
 
-      <div class="quick-facts" aria-label="Thông số nhanh">
-        <div class="fact">
-          <strong>2</strong>
-          <span>người chơi mỗi trận</span>
-        </div>
-        <div class="fact">
-          <strong>100</strong>
-          <span>HP tối đa</span>
-        </div>
-        <div class="fact">
-          <strong>15</strong>
-          <span>round tối đa</span>
-        </div>
-        <div class="fact">
-          <strong>12s</strong>
-          <span>để chọn mỗi round</span>
+        <div class="quick-facts" aria-label="Thông số nhanh">
+          <div class="fact">
+            <strong>100</strong>
+            <span>HP tối đa</span>
+          </div>
+          <div class="fact">
+            <strong>15</strong>
+            <span>round tối đa</span>
+          </div>
+          <div class="fact">
+            <strong>12s</strong>
+            <span>thời gian chọn</span>
+          </div>
+          <div class="fact">
+            <strong>3</strong>
+            <span>Heal Charges mỗi người</span>
+          </div>
         </div>
       </div>
+
+      <figure class="hero-image">
+        <img src="demoImage.png" alt="Minh họa giao diện Dilemma Duel với Heal Charge, nút Defend và lịch sử round">
+      </figure>
     </header>
 
     <nav aria-label="Mục lục">
       <a href="#muc-tieu">Mục tiêu</a>
-      <a href="#luong-choi">Luồng chơi</a>
-      <a href="#hanh-dong">Hành động</a>
+      <a href="#thong-so">Thông số</a>
+      <a href="#heal-charge">Heal Charge</a>
       <a href="#resolve">Resolve round</a>
-      <a href="#ket-thuc">Thắng thua</a>
+      <a href="#hoi-mau">Hồi máu</a>
       <a href="#timeout">Timeout</a>
-      <a href="#hien-thi">Hiển thị</a>
-      <a href="#chien-thuat">Chiến thuật</a>
+      <a href="#ui">Hiển thị UI</a>
+      <a href="#vi-du">Ví dụ</a>
     </nav>
 
     <section id="muc-tieu">
@@ -377,12 +497,16 @@
               <td>Thời gian cho phép kết nối lại</td>
               <td>20 giây</td>
             </tr>
+            <tr>
+              <td>Heal Charges khởi đầu</td>
+              <td>3</td>
+            </tr>
           </tbody>
         </table>
       </div>
       <p class="note">
         Ở phiên bản MVP, hai nhân vật có chỉ số giống nhau để đảm bảo công bằng.
-        Khác biệt ban đầu chỉ nằm ở tên, màu sắc, vị trí và hoạt ảnh.
+        Khác biệt giữa hai nhân vật chỉ nằm ở tên, màu sắc, vị trí và hoạt ảnh.
       </p>
     </section>
 
@@ -396,7 +520,7 @@
         <li>Mỗi round, cả hai bí mật chọn <code>Attack</code> hoặc <code>Defend</code>.</li>
         <li>Khi cả hai đã chọn, hoặc khi hết giờ, server xử lý kết quả round.</li>
         <li>Hành động của hai bên được reveal cùng lúc.</li>
-        <li>HP được cập nhật và lịch sử round được ghi lại.</li>
+        <li>HP, Heal Charges và lịch sử round được cập nhật.</li>
         <li>Trận đấu tiếp tục cho đến khi có người hết HP hoặc hết 15 round.</li>
       </ol>
     </section>
@@ -404,58 +528,64 @@
     <section id="hanh-dong">
       <h2>4. Hành động trong round</h2>
       <div class="grid-two">
-        <article class="action attack">
+        <article class="card attack">
           <h3>Attack</h3>
           <p><code>Attack</code> là hành động tấn công chủ động.</p>
           <ul>
-            <li>Nếu đối thủ cũng chọn <code>Attack</code>, cả hai cùng mất HP.</li>
-            <li>Nếu đối thủ chọn <code>Defend</code>, đối thủ nhận ít sát thương hơn, còn người tấn công bị recoil nhẹ.</li>
-            <li>Chọn <code>Attack</code> sẽ xóa chuỗi <code>Defend</code> liên tiếp của người chơi.</li>
+            <li>Nếu đối thủ cũng chọn <code>Attack</code>, cả hai cùng nhận sát thương lớn.</li>
+            <li>Nếu đối thủ chọn <code>Defend</code>, đối thủ nhận sát thương đã giảm, còn người tấn công nhận recoil nhẹ.</li>
+            <li><code>Attack</code> không tiêu tốn tài nguyên đặc biệt nào.</li>
+            <li>Người chơi luôn có thể chọn <code>Attack</code>.</li>
           </ul>
         </article>
 
-        <article class="action defend">
+        <article class="card defend">
           <h3>Defend</h3>
-          <p><code>Defend</code> là hành động phòng thủ và hồi máu.</p>
+          <p><code>Defend</code> là hành động phòng thủ.</p>
           <ul>
-            <li>Giảm hiệu quả sát thương nhận vào từ <code>Attack</code>.</li>
-            <li>Có thể hồi HP sau khi nhận sát thương.</li>
-            <li>Không thể hồi vượt quá 100 HP.</li>
-            <li>Hồi máu giảm dần nếu dùng <code>Defend</code> liên tiếp.</li>
+            <li>Giảm sát thương nhận vào từ <code>Attack</code>.</li>
+            <li>Có thể hồi máu sau khi bị đối thủ <code>Attack</code>.</li>
+            <li>Chỉ hồi máu nếu còn ít nhất 1 <code>Heal Charge</code>.</li>
+            <li>Mỗi lần hồi máu thành công tiêu tốn 1 <code>Heal Charge</code>.</li>
+            <li>Nếu hết <code>Heal Charge</code>, vẫn giảm sát thương nhưng không hồi máu.</li>
           </ul>
         </article>
-      </div>
-
-      <h3>Lượng hồi máu của Defend</h3>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Lần Defend liên tiếp</th>
-              <th>HP hồi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Lần đầu</td>
-              <td>+8 HP</td>
-            </tr>
-            <tr>
-              <td>Lần thứ 2 liên tiếp</td>
-              <td>+3 HP</td>
-            </tr>
-            <tr>
-              <td>Lần thứ 3 liên tiếp trở đi</td>
-              <td>+0 HP</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </section>
 
+    <section id="heal-charge">
+      <h2>5. Heal Charges</h2>
+      <div class="card heal">
+        <h3>Mỗi người chơi bắt đầu với 3 Heal Charges</h3>
+        <p>
+          <code>Heal Charge</code> là số lần người chơi có thể hồi máu khi dùng
+          <code>Defend</code> đúng thời điểm. Đây là tài nguyên công khai, cả hai bên đều nên nhìn thấy số lượt hồi còn lại.
+        </p>
+      </div>
+
+      <h3>Điều kiện tiêu Heal Charge</h3>
+      <p>Người chơi chỉ tiêu 1 <code>Heal Charge</code> khi thỏa mãn cả 3 điều kiện:</p>
+      <ol>
+        <li>Người chơi chọn <code>Defend</code>.</li>
+        <li>Đối thủ chọn <code>Attack</code>.</li>
+        <li>Người chơi còn ít nhất 1 <code>Heal Charge</code>.</li>
+      </ol>
+
+      <p class="note">
+        Nếu đủ điều kiện, người chơi nhận sát thương đã giảm, tiêu 1 Heal Charge, rồi hồi máu.
+      </p>
+
+      <h3>Không tiêu Heal Charge khi nào?</h3>
+      <ul>
+        <li>Người chơi chọn <code>Attack</code>.</li>
+        <li>Cả hai người chơi cùng chọn <code>Defend</code>.</li>
+        <li>Người chơi chọn <code>Defend</code> nhưng đã hết <code>Heal Charge</code>.</li>
+        <li>Người chơi timeout và bị auto chọn <code>Defend</code>.</li>
+      </ul>
+    </section>
+
     <section id="resolve">
-      <h2>5. Bảng xử lý kết quả round</h2>
-      <p>HP thay đổi sau khi cả hai người chơi đã chọn xong hoặc round bị timeout.</p>
+      <h2>6. Bảng xử lý kết quả round</h2>
       <div class="table-wrap">
         <table>
           <thead>
@@ -468,94 +598,228 @@
           <tbody>
             <tr>
               <td><strong>Attack</strong></td>
-              <td>A -18 HP, B -18 HP</td>
-              <td>A -4 HP, B -8 HP rồi được hồi theo Defend</td>
+              <td>A -16 HP, B -16 HP</td>
+              <td>A -2 HP, B -10 HP rồi B có thể hồi</td>
             </tr>
             <tr>
               <td><strong>Defend</strong></td>
-              <td>A -8 HP rồi được hồi theo Defend, B -4 HP</td>
-              <td>A được hồi theo Defend, B được hồi theo Defend</td>
+              <td>A -10 HP rồi A có thể hồi, B -2 HP</td>
+              <td>Không ai mất HP, không ai hồi máu</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <ul class="note">
-        <li>Sát thương được trừ trước.</li>
-        <li>Hồi máu được cộng sau.</li>
-        <li>HP luôn bị giới hạn trong khoảng từ 0 đến 100.</li>
-        <li>Client không tự tính damage, heal, HP hoặc kết quả thắng thua. Tất cả kết quả chính thức do server xử lý.</li>
-      </ul>
+    </section>
+
+    <section id="hoi-mau">
+      <h2>7. Hồi máu từ Defend</h2>
+      <p>Khi người chơi chọn <code>Defend</code> và bị đối thủ <code>Attack</code>:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Trạng thái Heal Charge</th>
+              <th>Kết quả</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Còn Heal Charge</td>
+              <td>Nhận sát thương, tiêu 1 Heal Charge, hồi +6 HP</td>
+            </tr>
+            <tr>
+              <td>Hết Heal Charge</td>
+              <td>Nhận sát thương đã giảm, không hồi HP</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid-two">
+        <article class="card">
+          <h3>Defender còn Heal Charge</h3>
+          <pre><code>A nhận -10 HP
+A tiêu 1 Heal Charge
+A hồi +6 HP
+Kết quả ròng: A -4 HP
+B nhận recoil -2 HP</code></pre>
+        </article>
+        <article class="card">
+          <h3>Defender hết Heal Charge</h3>
+          <pre><code>A nhận -10 HP
+A không hồi máu
+Kết quả ròng: A -10 HP
+B nhận recoil -2 HP</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section id="thu-tu">
+      <h2>8. Thứ tự tính toán trong round</h2>
+      <ol>
+        <li>Nhận lựa chọn của cả hai người chơi.</li>
+        <li>Nếu có người chưa chọn khi hết giờ, áp dụng hành động mặc định.</li>
+        <li>Reveal hành động của hai bên.</li>
+        <li>Tính sát thương.</li>
+        <li>Trừ HP.</li>
+        <li>Kiểm tra điều kiện hồi máu từ <code>Defend</code>.</li>
+        <li>Nếu đủ điều kiện, trừ <code>Heal Charge</code>.</li>
+        <li>Cộng hồi máu.</li>
+        <li>Giới hạn HP trong khoảng từ 0 đến 100.</li>
+        <li>Ghi lịch sử round.</li>
+        <li>Kiểm tra điều kiện kết thúc trận.</li>
+      </ol>
     </section>
 
     <section id="timeout">
-      <h2>6. Hết giờ chọn hành động</h2>
+      <h2>9. Hết giờ chọn hành động</h2>
       <ul>
         <li>Mỗi round có 12 giây để chọn hành động.</li>
         <li>Sau khi người chơi đã chọn, lựa chọn bị khóa và không thể đổi.</li>
-        <li>Nếu hết giờ mà người chơi chưa chọn, server tự động chọn <code>Defend</code> cho người đó.</li>
+        <li>Nếu hết giờ mà người chơi chưa chọn, server tự động chọn <code>Defend</code>.</li>
         <li>Hành động của đối thủ không được hiển thị trước khi cả hai đã khóa lựa chọn hoặc round hết giờ.</li>
       </ul>
+      <p class="warning">
+        Nếu bị auto <code>Defend</code> do timeout, người chơi vẫn được giảm sát thương,
+        nhưng không được hồi máu và không tiêu Heal Charge.
+      </p>
     </section>
 
     <section id="ket-thuc">
-      <h2>7. Điều kiện thắng, thua và hòa</h2>
+      <h2>10. Điều kiện thắng, thua và hòa</h2>
       <h3>Kết thúc do hết HP</h3>
       <ul>
         <li>Trận đấu kết thúc ngay khi có ít nhất một người chơi còn 0 HP hoặc thấp hơn sau một round.</li>
         <li>Nếu chỉ một người chơi còn 0 HP hoặc thấp hơn, người đó thua.</li>
-        <li>Nếu cả hai cùng còn 0 HP hoặc thấp hơn, người có HP cao hơn trước round đó thắng.</li>
-        <li>Nếu HP trước round cũng bằng nhau, trận đấu hòa.</li>
+        <li>Nếu cả hai cùng còn 0 HP hoặc thấp hơn trong cùng round, kết quả là hòa.</li>
       </ul>
 
       <h3>Kết thúc do hết round</h3>
       <ul>
         <li>Nếu sau 15 round chưa ai bị hạ, người chơi có HP cao hơn thắng.</li>
-        <li>Nếu HP hai bên bằng nhau, trận đấu hòa.</li>
+        <li>Nếu HP hai bên bằng nhau, kết quả là hòa.</li>
       </ul>
     </section>
 
     <section id="disconnect">
-      <h2>8. Mất kết nối và kết nối lại</h2>
+      <h2>11. Mất kết nối và kết nối lại</h2>
       <ul>
         <li>Nếu người chơi mất kết nối tạm thời, người đó có 20 giây để quay lại đúng trận.</li>
         <li>Trong lúc mất kết nối, nếu round đang chờ lựa chọn và hết giờ, server tự động chọn <code>Defend</code>.</li>
         <li>Nếu người chơi không quay lại trong 20 giây, người đó bị xử thua kỹ thuật.</li>
         <li>Đối thủ được tính thắng.</li>
       </ul>
+      <p class="note">
+        Auto <code>Defend</code> do mất kết nối có cùng luật với timeout: vẫn giảm sát thương,
+        không hồi máu, không tiêu Heal Charge.
+      </p>
     </section>
 
-    <section id="hien-thi">
-      <h2>9. Thông tin cần hiển thị trong trận</h2>
+    <section id="ui">
+      <h2>12. Thông tin cần hiển thị trong trận</h2>
       <ul>
         <li>Tên của mình và tên đối thủ.</li>
         <li>Nhân vật của hai bên.</li>
         <li>HP hiện tại và HP tối đa.</li>
         <li>Round hiện tại, ví dụ <code>Round 3/15</code>.</li>
         <li>Thời gian còn lại của round.</li>
+        <li>Số Heal Charges còn lại của bản thân.</li>
+        <li>Số Heal Charges còn lại của đối thủ.</li>
         <li>Trạng thái lựa chọn của bản thân.</li>
         <li>Trạng thái đối thủ đã chọn hay chưa, nhưng không lộ hành động trước khi reveal.</li>
         <li>Sát thương và hồi máu của round gần nhất.</li>
-        <li>Lịch sử vài round gần nhất để đọc chiến thuật của đối thủ.</li>
+        <li>Lịch sử vài round gần nhất để đọc chiến thuật.</li>
       </ul>
-    </section>
 
-    <section id="chien-thuat">
-      <h2>10. Tinh thần chiến thuật</h2>
-      <p>Trò chơi xoay quanh việc đọc ý định của đối thủ:</p>
-      <ul>
-        <li>Nếu đoán đối thủ sẽ <code>Attack</code>, chọn <code>Defend</code> giúp giảm sát thương và có thể hồi máu.</li>
-        <li>Nếu đoán đối thủ sẽ <code>Defend</code>, chọn <code>Attack</code> gây sát thương nhỏ nhưng người tấn công bị recoil.</li>
-        <li>Nếu cả hai cùng <code>Attack</code>, cả hai đều mất nhiều HP.</li>
-        <li>Nếu cả hai cùng <code>Defend</code>, cả hai đều hồi máu theo quy tắc chuỗi Defend.</li>
-      </ul>
-      <p class="callout">
-        Người chơi cần cân bằng giữa tấn công, phòng thủ, bait đối thủ và tránh lạm dụng
-        <code>Defend</code> vì hồi máu sẽ giảm khi dùng liên tiếp.
+      <h3>Gợi ý UI</h3>
+      <div class="pill-row">
+        <span class="pill"><strong>HP</strong>72/100</span>
+        <span class="pill"><strong>Heal Charge</strong>2</span>
+        <span class="pill"><strong>DEFEND</strong>x2</span>
+        <span class="pill"><strong>DEFEND</strong>x0, chỉ phòng thủ</span>
+      </div>
+      <p class="note">
+        Nút <code>Defend</code> luôn bấm được. Khi hết Heal Charge, nút nên thể hiện rõ là chỉ còn phòng thủ,
+        không còn hồi máu.
       </p>
     </section>
 
+    <section id="chien-thuat">
+      <h2>13. Tinh thần chiến thuật</h2>
+      <ul>
+        <li>Nếu đoán đối thủ sẽ <code>Attack</code>, chọn <code>Defend</code> giúp giảm sát thương và có thể hồi máu.</li>
+        <li>Nếu đoán đối thủ sẽ <code>Defend</code>, chọn <code>Attack</code> vẫn gây áp lực nhưng người tấn công chịu recoil nhẹ.</li>
+        <li>Nếu cả hai cùng <code>Attack</code>, cả hai đều mất nhiều HP.</li>
+        <li>Nếu cả hai cùng <code>Defend</code>, không ai mất HP và không ai hồi máu.</li>
+        <li>Heal Charges là tài nguyên quan trọng, cần dùng đúng thời điểm.</li>
+      </ul>
+      <p class="warning">
+        Người chơi không thể hồi máu vô hạn. Vì mỗi người chỉ có 3 Heal Charges,
+        việc chọn <code>Defend</code> cần được tính toán kỹ hơn.
+      </p>
+    </section>
+
+    <section id="vi-du">
+      <h2>14. Ví dụ xử lý round</h2>
+      <div class="examples">
+        <article class="card">
+          <h3>Ví dụ 1: Attack vs Attack</h3>
+          <pre><code>Player 1 chọn Attack
+Player 2 chọn Attack
+
+Player 1: -16 HP
+Player 2: -16 HP
+Không ai hồi máu
+Không ai tiêu Heal Charge</code></pre>
+        </article>
+
+        <article class="card">
+          <h3>Ví dụ 2: Defender còn Heal Charge</h3>
+          <pre><code>Player 1 chọn Attack
+Player 2 chọn Defend
+Player 2 còn 3 Heal Charges
+
+Player 1: -2 HP
+Player 2: -10 HP
+Player 2 tiêu 1 Heal Charge
+Player 2 hồi +6 HP
+
+Kết quả:
+Player 1: -2 HP
+Player 2: -4 HP ròng
+Player 2 còn 2 Heal Charges</code></pre>
+        </article>
+
+        <article class="card">
+          <h3>Ví dụ 3: Defender hết Heal Charge</h3>
+          <pre><code>Player 1 chọn Attack
+Player 2 chọn Defend
+Player 2 còn 0 Heal Charges
+
+Player 1: -2 HP
+Player 2: -10 HP
+Player 2 không hồi máu
+
+Kết quả:
+Player 1: -2 HP
+Player 2: -10 HP
+Player 2 vẫn còn 0 Heal Charges</code></pre>
+        </article>
+
+        <article class="card">
+          <h3>Ví dụ 4: Defend vs Defend</h3>
+          <pre><code>Player 1 chọn Defend
+Player 2 chọn Defend
+
+Không ai mất HP
+Không ai hồi máu
+Không ai tiêu Heal Charge</code></pre>
+        </article>
+      </div>
+    </section>
+
     <section id="ngoai-pham-vi">
-      <h2>11. Những tính năng chưa có trong MVP</h2>
+      <h2>15. Những tính năng chưa có trong MVP</h2>
       <ul>
         <li>Nhiều nhân vật có kỹ năng riêng.</li>
         <li>Trang bị hoặc vật phẩm.</li>
@@ -568,8 +832,60 @@
       </ul>
     </section>
 
+    <section id="can-bang">
+      <h2>16. Ghi chú cân bằng đề xuất cho MVP</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Thành phần</th>
+              <th>Giá trị</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>HP tối đa</td>
+              <td>100</td>
+            </tr>
+            <tr>
+              <td>Round tối đa</td>
+              <td>15</td>
+            </tr>
+            <tr>
+              <td>Attack vs Attack</td>
+              <td>-16 HP mỗi người</td>
+            </tr>
+            <tr>
+              <td>Attack vs Defend</td>
+              <td>Attacker -2 HP</td>
+            </tr>
+            <tr>
+              <td>Defend nhận Attack</td>
+              <td>Defender -10 HP</td>
+            </tr>
+            <tr>
+              <td>Hồi máu khi có Heal Charge</td>
+              <td>+6 HP</td>
+            </tr>
+            <tr>
+              <td>Heal Charges mỗi trận</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>Defend vs Defend</td>
+              <td>Không hồi máu</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">
+        Bản này giúp <code>Defend</code> vẫn có giá trị, nhưng không còn quá an toàn như bản cũ.
+        Người chơi vẫn có quyền phòng thủ bất cứ lúc nào, nhưng chỉ có 3 lần hồi máu thật sự trong cả trận.
+      </p>
+    </section>
+
     <footer>
-      Dilemma Duel MVP ruleset, generated from GameDesignSpec_v1.md
+      Tạo từ luat_choi_dilemma_duel_heal_charges.md, minh họa bằng demoImage.png.
     </footer>
   </main>
 </body>
