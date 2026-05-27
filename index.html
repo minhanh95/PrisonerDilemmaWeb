@@ -1,57 +1,45 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>PrisonerDilemma</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-functions-compat.js"></script>
-    <script>
-      (function initFirebaseForUnityWebGL() {
-        if (!window.firebase) {
-          console.error("[WebGLTemplate] Firebase SDK failed to load.");
-          return;
-        }
-        if (window.firebase.apps && window.firebase.apps.length > 0) return;
-
-        window.firebase.initializeApp({
-          apiKey: "AIzaSyCuwul6UxowWI-J_oXCSUknGysfMH4DMp4",
-          authDomain: "prisoner-s-dilemma-543d4.firebaseapp.com",
-          projectId: "prisoner-s-dilemma-543d4",
-          storageBucket: "prisoner-s-dilemma-543d4.firebasestorage.app",
-          messagingSenderId: "918488813308",
-          appId: "1:918488813308:android:493225e34ee450e35c5179"
-        });
-      })();
-    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity Web Player | PrisonerDilemma</title>
   </head>
-  <body style="margin:0; padding:0; overflow:hidden; background:#1e1e1e;">
-    <canvas id="unity-canvas" width=960 height=600 tabindex="-1" style="width:100vw; height:100vh; background:#231f20"></canvas>
-
+  <body style="text-align: center; padding: 0; border: 0; margin: 0;">
+    <canvas id="unity-canvas" width=960 height=600 tabindex="-1" style="width: 960px; height: 600px; background: #231F20"></canvas>
+    <script src="Build/Test.loader.js"></script>
     <script>
-      var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/Test.loader.js";
-      var config = {
-        dataUrl: buildUrl + "/Test.data.unityweb",
-        frameworkUrl: buildUrl + "/Test.framework.js.unityweb",
-        codeUrl: buildUrl + "/Test.wasm.unityweb",
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+
+        var canvas = document.querySelector("#unity-canvas");
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+        canvas.style.position = "fixed";
+
+        document.body.style.textAlign = "left";
+
+      }
+
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        arguments: [],
+        dataUrl: "Build/Test.data.unityweb",
+        frameworkUrl: "Build/Test.framework.js.unityweb",
+        codeUrl: "Build/Test.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "MonoPoly",
         productName: "PrisonerDilemma",
-        productVersion: "0.1.0"
-      };
-
-      var script = document.createElement("script");
-      script.src = loaderUrl;
-      script.onload = function () {
-        createUnityInstance(document.querySelector("#unity-canvas"), config, function () {})
-          .catch(function (message) { alert(message); });
-      };
-      document.body.appendChild(script);
+        productVersion: "0.1.0",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      }).then((unityInstance) => {
+      }).catch((message) => {
+        alert(message);
+      });
     </script>
   </body>
 </html>
