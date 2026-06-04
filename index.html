@@ -133,7 +133,7 @@
       </div>
     </div>
 
-    <script src="Build/Test.loader.js"></script>
+    <script src="Build/WebGLRemoteOnlyTest.loader.js"></script>
     <script>
       const canvas = document.querySelector("#unity-canvas");
       const loadingBar = document.querySelector("#unity-loading-bar");
@@ -148,9 +148,9 @@
 
       createUnityInstance(canvas, {
         arguments: [],
-        dataUrl: "Build/Test.data.unityweb",
-        frameworkUrl: "Build/Test.framework.js.unityweb",
-        codeUrl: "Build/Test.wasm.unityweb",
+        dataUrl: "Build/WebGLRemoteOnlyTest.data.unityweb",
+        frameworkUrl: "Build/WebGLRemoteOnlyTest.framework.js.unityweb",
+        codeUrl: "Build/WebGLRemoteOnlyTest.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "MonoPoly",
         productName: "PrisonerDilemma",
