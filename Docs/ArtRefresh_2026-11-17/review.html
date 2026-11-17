@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>CatBattle art — viewport review</title>
+<style>
+  body { margin:24px; background:#e4ece5; color:#253831; font:16px Arial,sans-serif; }
+  main { display:flex; gap:24px; align-items:flex-start; }
+  h1 { font-size:20px; } h2 { font-size:14px; }
+  .stage { position:relative; overflow:hidden; border:1px solid #d9e0d8; }
+  iframe { border:0; position:absolute; transform-origin:top left; }
+  .desktop { width:768px; height:432px; }
+  .desktop iframe { width:1280px; height:720px; transform:scale(.6); }
+  .phone { width:300px; height:649.6px; }
+  .phone iframe { width:375px; height:812px; transform:scale(.8); }
+  .landscape { width:675.2px; height:312px; }
+  .landscape iframe { width:844px; height:390px; transform:scale(.8); }
+</style>
+<h1>CatBattle · cream &amp; sage loading art</h1>
+<main>
+  <section>
+    <h2>Desktop · 1280 × 720</h2>
+    <div class="stage desktop"><iframe src="preview.html" title="Desktop loading preview"></iframe></div>
+    <h2>Landscape · 844 × 390</h2>
+    <div class="stage landscape"><iframe src="preview.html" title="Landscape loading preview"></iframe></div>
+  </section>
+  <section>
+    <h2>Phone · 375 × 812</h2>
+    <div class="stage phone"><iframe src="preview.html" title="Phone loading preview"></iframe></div>
+  </section>
+</main>
+</html>

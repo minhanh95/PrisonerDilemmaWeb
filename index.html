@@ -6,11 +6,21 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
     <title>CatBattle</title>
     <style>
+      @font-face {
+        font-family: "Nunito";
+        src: url("Fonts/Nunito-Bold.ttf") format("truetype");
+        font-weight: 700;
+        font-display: swap;
+      }
+
       :root {
         --game-aspect-width: 1080;
         --game-aspect-height: 1920;
-        --track: rgba(255, 255, 255, 0.28);
-        --panel: rgba(3, 21, 30, 0.56);
+        --track: #e4ece5;
+        --panel: #f6f4ef;
+        --primary: #294d43;
+        --ink: #253831;
+        --line: #d9e0d8;
       }
 
       * {
@@ -24,8 +34,9 @@
         margin: 0;
         padding: 0;
         overflow: hidden;
-        background: #67d5ef url("bgr.png") center center / cover no-repeat fixed;
-        font-family: Arial, Helvetica, sans-serif;
+        overscroll-behavior: none;
+        background: #f6f4ef url("bgr.png?v=20261117") center center / cover no-repeat;
+        font-family: "Nunito", Arial, sans-serif;
       }
 
       #unity-container {
@@ -44,11 +55,22 @@
         max-height: 100vh;
       }
 
+      /* Mobile Safari/Chrome: 100vh includes the URL bar and cuts off the bottom of the game. */
+      @supports (height: 100dvh) {
+        #unity-frame {
+          width: min(100vw, calc(100dvh * var(--game-aspect-width) / var(--game-aspect-height)));
+          height: min(100dvh, calc(100vw * var(--game-aspect-height) / var(--game-aspect-width)));
+          max-height: 100dvh;
+        }
+      }
+
       #unity-canvas {
         display: block;
         width: 100%;
         height: 100%;
-        background: rgba(35, 31, 32, 0.08);
+        touch-action: none;
+        -webkit-tap-highlight-color: transparent;
+        background: transparent;
         outline: none;
       }
 
@@ -61,7 +83,7 @@
         justify-content: center;
         gap: 22px;
         padding: 32px;
-        background: linear-gradient(180deg, rgba(0, 28, 40, 0.18), rgba(0, 28, 40, 0.36));
+        background: linear-gradient(180deg, rgba(246, 244, 239, 0.3), rgba(246, 244, 239, 0.74));
         transition: opacity 220ms ease, visibility 220ms ease;
       }
 
@@ -72,9 +94,9 @@
       }
 
       #unity-logo {
-        width: clamp(72px, 18vw, 132px);
+        width: min(76%, 280px, 40vh);
         height: auto;
-        filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.28));
+        filter: drop-shadow(0 8px 16px rgba(41, 77, 67, 0.12));
       }
 
       #unity-progress-shell {
@@ -83,14 +105,15 @@
         padding: 2px;
         border-radius: 999px;
         background: var(--track);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+        border: 1px solid var(--line);
+        box-shadow: 0 3px 10px rgba(41, 77, 67, 0.08);
       }
 
       #unity-progress-bar {
         width: 0%;
         height: 100%;
         border-radius: inherit;
-        background: linear-gradient(90deg, #11c8ff, #63ffe2);
+        background: var(--primary);
         transition: width 120ms ease-out;
       }
 
@@ -98,13 +121,13 @@
         min-width: 56px;
         padding: 6px 10px;
         border-radius: 999px;
-        color: #ffffff;
+        color: var(--ink);
         background: var(--panel);
         font-size: 14px;
         font-weight: 700;
         line-height: 1;
         text-align: center;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+        border: 1px solid var(--line);
       }
 
       @media (max-width: 480px) {
@@ -117,6 +140,13 @@
           width: min(78%, 300px);
         }
       }
+
+      @media (prefers-reduced-motion: reduce) {
+        #unity-loading-bar,
+        #unity-progress-bar {
+          transition: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -124,7 +154,7 @@
       <div id="unity-frame">
         <canvas id="unity-canvas" width="1080" height="1920" tabindex="-1"></canvas>
         <div id="unity-loading-bar" aria-live="polite">
-          <img id="unity-logo" src="logo.png" alt="Logo">
+          <img id="unity-logo" src="logo.png?v=20261117" alt="CatBattle" width="1254" height="1254" decoding="async" fetchpriority="high">
           <div id="unity-progress-shell">
             <div id="unity-progress-bar"></div>
           </div>
@@ -146,8 +176,16 @@
         loadingText.textContent = percent + "%";
       }
 
+      // Sharp on high-DPI screens, but cap the backbuffer near the 1080x1920 design
+      // resolution so 3x phones / 4K monitors don't render far more pixels than the art has.
+      const DESIGN_HEIGHT = 1920;
+      const frameHeight = canvas.getBoundingClientRect().height || window.innerHeight;
+      const renderDpr = Math.max(1, Math.min(window.devicePixelRatio || 1, DESIGN_HEIGHT / frameHeight));
+      console.log("[WebDisplay] cssHeight=" + Math.round(frameHeight) + " browserDpr=" + window.devicePixelRatio + " renderDpr=" + renderDpr.toFixed(2));
+
       createUnityInstance(canvas, {
         arguments: [],
+        devicePixelRatio: renderDpr,
         dataUrl: "Build/Web.data.unityweb",
         frameworkUrl: "Build/Web.framework.js.unityweb",
         codeUrl: "Build/Web.wasm.unityweb",
@@ -158,6 +196,7 @@
       }, setProgress).then((unityInstance) => {
         setProgress(1);
         loadingBar.classList.add("is-hidden");
+        console.log("[WebDisplay] backbuffer=" + canvas.width + "x" + canvas.height);
       }).catch((message) => {
         loadingText.textContent = "Load failed";
         alert(message);
